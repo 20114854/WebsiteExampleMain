@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebsiteExampleMain.Models;
 
 namespace WebsiteExampleMain
 {
@@ -23,6 +25,8 @@ namespace WebsiteExampleMain
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<Student_Context>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("online")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
